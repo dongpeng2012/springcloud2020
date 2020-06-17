@@ -48,7 +48,7 @@ public class RabbitController {
         amqpAdmin.declareExchange (directExchange);
         System.out.println ("交换机创建完成");
     }
-    @RequestMapping(value = "/createBinging")
+    @RequestMapping(value = "/createBinding")
     public void createBinding(){
         Binding binding = new Binding ("my-queue-01", Binding.DestinationType.QUEUE,"my-exchange","hello",null);
         amqpAdmin.declareBinding (binding);
