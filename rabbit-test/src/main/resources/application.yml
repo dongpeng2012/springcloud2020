@@ -4,5 +4,9 @@ spring:
     username: guest
     password: guest
     virtual-host: /
+    #开启手动ack
+    listener:
+      simple:
+        acknowledge-mode: manual
 server:
   port: 8080

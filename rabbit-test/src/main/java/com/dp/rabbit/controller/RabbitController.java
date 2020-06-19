@@ -1,8 +1,7 @@
 package com.dp.rabbit.controller;
 
-import com.dp.rabbit.bean.User;
+import com.dp.rabbit.bean.Order;
 import com.dp.springcloud.entities.Payment;
-import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
@@ -13,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 /**
  * @author dp
@@ -54,5 +55,14 @@ public class RabbitController {
         amqpAdmin.declareBinding (binding);
         System.out.println ("绑定创建完成");
     }
+    @RequestMapping("/create/order")
+    public Order createOrder(Long skuId,Integer num,Integer memberId){
+        Order order = new Order(UUID.randomUUID().toString().replace("-", ""), skuId, num, memberId);
+//        rabbitTemplate.convertAndSend("order-exchange","createOrder",order);
+        rabbitTemplate.convertAndSend("user.order.delay.exchange","delay_order",order);
+        return order;
+    }
+
+
 
 }
