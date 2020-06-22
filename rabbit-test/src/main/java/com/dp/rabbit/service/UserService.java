@@ -2,6 +2,7 @@ package com.dp.rabbit.service;
 
 
 import com.dp.rabbit.bean.Order;
+import com.dp.springcloud.entities.Payment;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -51,6 +52,11 @@ public class UserService {
         System.out.println("收到过期订单："+order);
 //        Thread.currentThread().sleep(2000);
         channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+    }
+    @RabbitListener(queues = {"user.order.queue"})
+    public void closeOrder(Payment payment, Channel channel, Message message) throws IOException {
+        System.out.println ("收到过期订单"+payment+"正在关单");
+        channel.basicAck (message.getMessageProperties ().getDeliveryTag (),false);
     }
 
 

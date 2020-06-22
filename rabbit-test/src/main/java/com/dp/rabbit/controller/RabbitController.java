@@ -31,7 +31,9 @@ public class RabbitController {
         Payment payment = new Payment (50L, "李白");
 //        rabbitTemplate.setMessageConverter (new Jackson2JsonMessageConverter ());
 //        User user = new User ("zs","zhangsan@qq.com");
-        rabbitTemplate.convertAndSend ("direct_exchange","world",payment);
+//        rabbitTemplate.convertAndSend ("direct_exchange","world",payment);
+
+        rabbitTemplate.convertAndSend ("user.order.delay.exchange","order_delay",payment);
         log.info ("消息发送完成!");
     }
     @RequestMapping(value = "/createQueue")
@@ -62,6 +64,9 @@ public class RabbitController {
         rabbitTemplate.convertAndSend("user.order.delay.exchange","delay_order",order);
         return order;
     }
+
+
+
 
 
 
