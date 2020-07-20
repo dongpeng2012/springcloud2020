@@ -18,6 +18,9 @@ import javax.annotation.Resource;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 
 @RestController
 @Slf4j
@@ -28,6 +31,8 @@ public class OrderController {
     private LoadBalancer loadBalancer;
     @Resource
     private DiscoveryClient discoveryClient;
+    @Resource
+    private ExecutorService executorService;
 
     public static final String PAYMENT_URL="http://cloud-payment-service";
     @GetMapping("consumer/payment/create")
@@ -65,6 +70,25 @@ public class OrderController {
         String result = restTemplate.getForObject("http://localhost:8001"+"/payment/zipkin/", String.class);
         return result;
     }
-
-
+    @GetMapping("/test")
+    public Integer testExecutor(){
+        Integer all=0;
+        for (int i = 0; i <5 ; i++) {
+            CompletableFuture<Integer> async = CompletableFuture.supplyAsync(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+                return 10;
+            },executorService).whenComplete((t,u)->{
+                System.out.println(Thread.currentThread().getName()+t);
+                System.out.println(u);
+            }).exceptionally(f->{
+                System.out.println(f.getMessage());
+                return 4444;
+            });
+        }
+        return all;
+    }
 }
