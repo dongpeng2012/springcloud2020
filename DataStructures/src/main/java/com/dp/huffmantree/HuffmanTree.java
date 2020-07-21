@@ -63,6 +63,7 @@ public class HuffmanTree {
 }
 class Node implements Comparable<Node>{
     int value;//节点权值
+    char c;
     Node left;//指向做自己额点
     Node right;//指向柚子节点
 
