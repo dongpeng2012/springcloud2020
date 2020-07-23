@@ -33,6 +33,7 @@
         <module>cloud-stream-rabbitmq-provider8801</module>
         <module>cloud-stream-rabbitmq-consumer8802</module>
         <module>cloud-stream-rabbitmq-consumer8803</module>
+        <module>cloudalibaba-sentinel-service8401</module>
         <module>netty-project</module>
     </modules>
 <!---->
@@ -90,7 +91,16 @@
           <artifactId>mybatis-spring-boot-starter</artifactId>
           <version>${mybatis.spring.boot.version}</version>
         </dependency>
+          <!--spring cloud alibaba 2.1.0.RELEASE-->
+          <dependency>
+              <groupId>com.alibaba.cloud</groupId>
+              <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+              <version>2.1.0.RELEASE</version>
+              <type>pom</type>
+              <scope>import</scope>
+          </dependency>
       </dependencies>
+
   </dependencyManagement>
 
   <build>
