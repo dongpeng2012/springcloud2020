@@ -86,6 +86,9 @@ class Node{
         }
     }
 
+    
+
+
     //中序遍历
     public void infixOrder(){
         if (this.left!=null){

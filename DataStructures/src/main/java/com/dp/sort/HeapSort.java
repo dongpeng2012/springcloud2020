@@ -1,4 +1,4 @@
-package com.dp.tree;
+package com.dp.sort;
 
 
 import java.util.Arrays;
