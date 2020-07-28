@@ -40,6 +40,8 @@
         <module>nio</module>
         <module>cloudalibaba-sentinel-service8401</module>
         <module>netty-project</module>
+        <module>cloudalibaba-provider-payment9003</module>
+        <module>cloudalibaba-provider-payment9004</module>
     </modules>
 <!---->
 <!--  统一管理jar包版本-->

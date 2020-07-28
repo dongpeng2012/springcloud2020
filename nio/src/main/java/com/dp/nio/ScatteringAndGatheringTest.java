@@ -8,7 +8,6 @@ package com.dp.nio;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
@@ -59,7 +58,7 @@ public class ScatteringAndGatheringTest {
             }
             //将所有的buffer进行clean
             Arrays.asList (byteBuffers).stream ().forEach (byteBuffer -> byteBuffer.clear ());
-            System.out.println ("byteRead="+byteRead+"byteWrite"+byteWrite+"*****"messageLength);
+            System.out.println ("byteRead="+byteRead+"byteWrite"+byteWrite+"*****"+messageLength);
         }
 
 
